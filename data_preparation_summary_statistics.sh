@@ -2,6 +2,10 @@
 ### Dataset preparation for applying metaCCA to GWAS summary statistics datasets
 
 # ===== 1. For BioBank Japan GWAS Summary statistics datasets (and using reference dataset: East Asian 1000GP) ====
+# References:
+# Kanai, M. et al. Genetic analysis of quantitative traits in the Japanese population links cell types to complex human diseases. Nat Genet 50, 390-400, doi:10.1038/s41588-018-0047-6 (2018).
+# Hemani, G. et al. The MR-Base platform supports systematic causal inference across the human phenome. Elife 7, doi:10.7554/eLife.34408 (2018).
+
 # Download published and publicly accessible GWAS summary statistics files using wget, then unzip.
 wget https://gwas.mrcieu.ac.uk/files/bbj-a-60/bbj-a-60.vcf.gz
 wget https://gwas.mrcieu.ac.uk/files/bbj-a-11/bbj-a-11.vcf.gz
@@ -30,16 +34,22 @@ tar -xzf g1000p3_EAS.tar.gz
 
 # ==== 2. For EUR 1000GP (European for CKDGen, UKHLS) =====
 # Download EUR 1000GP from VEGAS2 website: https://vegas2.qimrberghofer.edu.au/
+# Reference: Mishra, A. & Macgregor, S. VEGAS2: Software for more flexible gene-based testing. Twin Res Hum Genet. 18, 86-91, doi: 10.1017/thg.2014.79 (2015).
 # Convert to vcf using PLINK command:  plink --bfile /path/to/yourfile --recode vcf --out /path/to/yourfile
+# Reference for PLINK: Chang, C. C. et al. Second-generation PLINK: rising to the challenge of larger and richer datasets. Gigascience 4, 7, doi:10.1186/s13742-015-0047-8 (2015).
+
 tar -xzf g1000p3_EUR.tar.gz
 plink --bfile g1000p3_EUR --recode vcf --out g1000p3_EUR.vcf
 
 # Download CKDGen data files for EUR, eGFR and BUN:
+# Reference: Wuttke, M. et al. A catalog of genetic loci associated with kidney function from analyses of a million individuals. Nat Genet 51, 957-972, doi:10.1038/s41588-019-0407-x (2019).
 wget https://ckdgen.imbi.uni-freiburg.de/files/Wuttke2019/20171017_MW_eGFR_overall_EA_nstud42.dbgap.txt.gz
 wget https://ckdgen.imbi.uni-freiburg.de/files/Wuttke2019/BUN_overall_EA_YL_20171108_METAL1_nstud24.dbgap.txt.gz
 # Get SNPs for eGFR and BUN, as above -> data.txt (for example)
 
 # Download UKHLS data files for eGFR and BUN:
+# Reference for UKHLS GWAS: Prins, B. P. et al. Genome-wide analysis of health-related biomarkers in the UK Household Longitudinal Study reveals novel associations. Sci Rep 7, 11008, doi:10.1038/s41598-017-10812-1 (2017).
+# Reference for EBI database: Buniello, A. et al. The NHGRI-EBI GWAS Catalog of published genome-wide association studies, targeted arrays and summary statistics 2019. Nucleic Acids Res 47, D1005-D1012, doi:10.1093/nar/gky1120 (2019).
 wget http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST005001-GCST006000/GCST005063/harmonised/28887542-GCST005063-EFO_0005208-build37.f.tsv.gz
 wget http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST005001-GCST006000/GCST005070/harmonised/28887542-GCST005070-EFO_0004741-build37.f.tsv.gz
 # Get SNPs for eGFR and BUN, as above -> data.txt (for example)
