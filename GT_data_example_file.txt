@@ -1,0 +1,2 @@
+CHROM   POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  xxx1 xxx2
+1       900034  rs299881      T       G       .       .       PR      GT      0       0
