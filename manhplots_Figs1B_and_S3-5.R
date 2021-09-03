@@ -492,7 +492,7 @@ pushViewport(viewport(layout=grid.layout(1,heights=c(1))))
 print(manhplot_all3_w_annot_genebased, vp=viewport(layout.pos.row=1,layout.pos.col=1))
 dev.off()
 
-# Add Fig 1A too (see script: manhplots_nurture-ckd_for_Fig1A.R)
+# Add Fig 1A too (see script: manhplots_for_Fig1A.R)
 jpeg("manh_plot_nurture_plus_all3_w_genebased.jpeg", pointsize=6, width=170, height=250,units="mm",res = 294)
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(nrow=2,ncol=1, heights = c(0.3, 1))))
