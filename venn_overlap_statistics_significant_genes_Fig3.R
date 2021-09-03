@@ -6,7 +6,7 @@ library(qdap)
 library(venn)
 
 # For Fig. 3
-CKDGen_GWAS <- read.table("wuttke_kidrel1_122snps_mvp.txt", header=F)
+CKDGen_GWAS <- read.table("wuttke_122snps.txt", header=F)
 CKDGen_GWAS_genes <- CKDGen_GWAS$V4
 CKDGen_metaCCA <- read.table("ckdgen_159sig_genes.txt", header=T)
 CKDGen_metaCCA_genes <- multigsub(c("-"), c("_"), CKDGen_metaCCA$HGNC_Approved_sym)
