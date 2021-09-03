@@ -1,7 +1,5 @@
 # CCA_scripts
-This software was developed by Amy J. Osborne.
-
-This software is based on: 
+The scripts here were developed by Amy J. Osborne and based on the following: 
 
 -gaCCA: Seoane JA, Campbell C, Day IN, Casas JP, Gaunt TR. Canonical correlation analysis for gene-based pleiotropy discovery. PLoS Comput Biol. 2014 Oct 16;10(10):e1003876. doi: 10.1371/journal.pcbi.1003876. PMID: 25329069; PMCID: PMC4199483.
 
@@ -36,4 +34,14 @@ This software uses the following function:
 
   (c) gene_based_multivariateSNP_metaCCA.R
 
-3. Visualisation of results:
+3. Enrichment analyses and visualisation of results:
+
+  (a) manhplots_Fig1A.R
+
+  (b) manhplots_Figs1B_and_S3-5.R
+  
+  (c) venn_overlap_statistics_significant_genes_Fig3.R
+  
+  (d) enrichment_analyses_Figs4-6_and_S6-S9.R
+  
+  (e) enrichment_RNAexpr_Gillies2018_Fig7.R
