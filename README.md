@@ -28,7 +28,7 @@ This software uses the following function:
 
 2. Data analysis:
 
-  (a) univariate_and_genebased_CCA.R
+  (a) univariate_CCA.R
 
   (b) univariate_metaCCA.R
 
