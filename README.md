@@ -36,12 +36,10 @@ This software uses the following function:
 
 3. Enrichment analyses and visualisation of results:
 
-  (a) manhplots_Fig1A.R
+  (a) manhplots_Figs2_6.R
 
-  (b) manhplots_Figs1B_and_S3-5.R
+  (b) bar_charts_Fig3.R
   
-  (c) venn_overlap_statistics_significant_genes_Fig3.R
+  (c) venn_overlap_statistics_significant_genes_Fig5.R
   
-  (d) enrichment_analyses_Figs4-6_and_S6-S9.R
-  
-  (e) enrichment_RNAexpr_Gillies2018_Fig7.R
+  (d) enrichment_analyses_Fig4.R
