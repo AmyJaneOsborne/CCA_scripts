@@ -56,18 +56,6 @@ sig <- 0.01
 
 box_xmax <- (min(gwas.dat[gwas.dat$chr==4,9]))+((max(gwas.dat[gwas.dat$chr==4,9])-(min(gwas.dat[gwas.dat$chr==4,9])))/3)
 
-gwas.dat.nurture <- gwas.dat
-gwas.dat.nurture$dataset <- "nurture-ckd"
-
-# Add gene-based results to plot (as square shape):
-gene_based_snps <- read.csv("genebased_forplot.csv",header=T)
-gene_based_snps <- separate_rows(gene_based_snps,snp, sep=", ", convert = TRUE)
-names(gene_based_snps) <- c("SNP","gene","dataset","pval_adj")
-gwas.dat.gene_based <- merge(gene_based_snps[gene_based_snps$dataset=="nurture-ckd",],gwas.dat,by=c("SNP"),all.x=T)
-gene_based_snps_info <- gwas.dat.gene_based[,c(1:4,9,13)]
-gene_based_snps_info$pval_minuslog10 <- -log10(gene_based_snps_info$pval_adj)
-sql <- sqldf("SELECT MAX(BPcum), SNP, dataset, gene, pval_adj, chr, BPcum, pval_minuslog10 FROM gene_based_snps_info WHERE dataset == 'nurture-ckd' GROUP BY gene, dataset")
-
 manhplot <- ggplot(gwas.dat, aes(x = BPcum, y = pval_minuslog10, color = as.factor(chr), group = as.factor(chr))) +
   geom_point(alpha = 0.75,stroke = 0, shape = 16,size=1.6) +
   geom_hline(yintercept = -log10(sig), color = "black", linetype = "dashed") +
@@ -105,9 +93,9 @@ manhplot <- ggplot(gwas.dat, aes(x = BPcum, y = pval_minuslog10, color = as.fact
     plot.tag = element_text(face="bold", size = 20,color="black")
 )
 
-jpeg("manh_plot_1a.jpeg", pointsize=6, width=170, height=70,units="mm",res = 294)
+jpeg("manh_plot.jpeg", pointsize=6, width=170, height=70,units="mm",res = 294)
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(1,heights=c(1))))
-print(manhplot_nurture, vp=viewport(layout.pos.row=1,layout.pos.col=1))
+print(manhplot, vp=viewport(layout.pos.row=1,layout.pos.col=1))
 
 dev.off()
