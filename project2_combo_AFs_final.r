@@ -26,7 +26,7 @@ CKD_PTs <- read.csv("data.csv", header=T)
 
 membr <- CKD_PTs[CKD_PTs$primary_diagnosis_Membranous.nephropathy...idiopathic ==1,]
 GTs.membr <- GTs[,names(GTs) %in% membr$SentrixPosition]
-# 87 in total
+
 GTs.membr$no.hom.0 <-  rowSums(GTs.membr[,c(1:ncol(GTs.membr))] == "0/0")  
 GTs.membr$no.het.01 <- rowSums(GTs.membr[,c(1:ncol(GTs.membr))] == "0/1")  
 GTs.membr$no.het.10 <- rowSums(GTs.membr[,c(1:ncol(GTs.membr))] == "1/0") 
@@ -40,7 +40,7 @@ GTs.membr$alt.ac <- GTs.membr$no.het + (GTs.membr$no.hom.1*2)
 GTs.membr$an <- GTs.membr$total*2
 GTs.membr$PT <- "GTs.membr"
 
-# membr - combinations of up to 6 SNPs:
+# membr - combinations of up to 16 SNPs:
 results_combo_Membr <- data.frame(no_SNPs = numeric(), SNPs = character(), overlap = numeric(), no_overlap = numeric(), stringsAsFactors=FALSE)
 
 for(m in 1:6){
@@ -167,13 +167,13 @@ for(m in 1:6){
 }
 
 results_combo_nonMembr$freq_nonMN = results_combo_nonMembr$no_overlap/817
-# 847
+
 
 ### =======
 # GTs - non-membr and non T1DN:
 non_membr_nonT1DN <- CKD_PTs[CKD_PTs$primary_diagnosis_Membranous.nephropathy...idiopathic ==0 & CKD_PTs$primary_diagnosis_Diabetic.nephropathy.in.type.I.diabetes...no.histology ==0,]
 GTs.non_membr_nonT1DN <- GTs[,names(GTs) %in% non_membr_nonT1DN$SentrixPosition]
-# 770
+
 GTs.non_membr_nonT1DN$no.hom.0 <-  rowSums(GTs.non_membr_nonT1DN[,c(1:ncol(GTs.non_membr_nonT1DN))] == "0/0") 
 GTs.non_membr_nonT1DN$no.het.01 <- rowSums(GTs.non_membr_nonT1DN[,c(1:ncol(GTs.non_membr_nonT1DN))] == "0/1")  
 GTs.non_membr_nonT1DN$no.het.10 <- rowSums(GTs.non_membr_nonT1DN[,c(1:ncol(GTs.non_membr_nonT1DN))] == "1/0") 
@@ -820,4 +820,5 @@ mn_pla2r_vs_ctrl.nonMN.MN.nonT1DN.ctrl_NonT1D <- merge(mn_pla2r_vs_ctrl.nonMN.MN
 
 write.csv(results_combo_ctrl_v2, "AF_combos_5lead_plus_PLA2RLead_and_AllPredmissense_16total_allGroups_incnonT1D_Hom_Het.csv", quote=F, row.names=F)
 write.csv(mn_pla2r_vs_ctrl.nonMN.MN.nonT1DN.ctrl_NonT1D, "AF_combos_5lead_plus_PLA2RLead_and_AllPredmissense_16total_allGroups_incnonT1D_Hom_Het.csv", quote=F, row.names=F)
+
 
