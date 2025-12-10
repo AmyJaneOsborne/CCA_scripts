@@ -22,25 +22,25 @@ nrow(NCKD_data.sig)
 # 943
 
 # ==== In Bash: add MAF data for lead snps: rs3132450	 rs79350521	 rs1064994	 rs28630740	 rs2395231
-plink2 --vcf ~/GWAS_N_APRIL2021/Genotyping_data.GTS.DUP.excl.keepCtrls.maf.geno.mind.hwe2.king.EUR.beagle.hg38_1000GP.R2_0.9.dbSNP153IDs.maf.hwe.vcf.gz \
+plink2 --vcf ~/GWAS/Genotyping_data.vcf.gz \
 	--snps rs3132450, rs79350521, rs1064994, rs28630740, rs2395231  \
 	--keep-allele-order \
 	--double-id \
 	--recode vcf \
-	--out ~/GWAS_N_APRIL2021/Genotyping_data.GTS.DUP.excl.keepCtrls.maf.geno.mind.hwe2.king.EUR.beagle.hg38_1000GP.R2_0.9.maf.hwe_MN943_5leadSNPs.vcf
+	--out ~/GWAS/Genotyping_data_5leadSNPs.vcf
 
 # min: 6:31596138:A:G 
 # max:  6:32637302:A:G
 
 # also extract for 6:31596138 -200K, and 6:32637302 +200k
-plink2 --vcf ~/GWAS_N_APRIL2021/Genotyping_data.GTS.DUP.excl.keepCtrls.maf.geno.mind.hwe2.king.EUR.beagle.hg38_1000GP.R2_0.9.dbSNP153IDs.maf.hwe.vcf.gz \
+plink2 --vcf ~/GWAS/Genotyping_data.vcf.gz \
 	--chr 6 \
 	--from-bp 31396138 \
 	--to-bp 32837302 \
 	--keep-allele-order \
 	--double-id \
 	--recode vcf \
-	--out ~/GWAS_N_APRIL2021/Genotyping_data.GTS.DUP.excl.keepCtrls.maf.geno.mind.hwe2.king.EUR.beagle.hg38_1000GP.R2_0.9.maf.hwe_MN_minmax_200k.vcf
+	--out ~/GWAS/Genotyping_data_minmax_200k.vcf
 
 # ============================
 
@@ -49,7 +49,7 @@ NCKD_data$id <- paste0(NCKD_data$chr, ":", NCKD_data$pos)
 NCKD_data$rsID <- NCKD_data$SNP
 
 # get MAF data:
-snps10 <- read.table("Genotyping_data.GTS.DUP.excl.keepCtrls.maf.geno.mind.hwe2.king.EUR.beagle.hg38_1000GP.R2_0.9.maf.hwe_MN943_5leadSNPs.vcf.vcf", comment.char = "", skip = 30, header=T)
+snps10 <- read.table("Genotyping_data_5leadSNPs.vcf.vcf", comment.char = "", skip = 30, header=T)
 snps10[,c(10:ncol(snps10))] <- as.data.frame(sapply(snps10[,c(10:ncol(snps10))], function(x) gsub("0/0", 0, x)))
 snps10[,c(10:ncol(snps10))] <- as.data.frame(sapply(snps10[,c(10:ncol(snps10))], function(x) gsub("0/1", 1, x)))
 snps10[,c(10:ncol(snps10))] <- as.data.frame(sapply(snps10[,c(10:ncol(snps10))], function(x) gsub("1/0", 1, x)))
@@ -61,7 +61,7 @@ snps10$AF <- snps10$AC/AN
 snps10.maf <- snps10[,c(3,2564)]
 names(snps10.maf) <- c("SNP","MAF")
 
-snps1_range <- read.table("Genotyping_data.GTS.DUP.excl.keepCtrls.maf.geno.mind.hwe2.king.EUR.beagle.hg38_1000GP.R2_0.9.maf.hwe_MN_minmax_200k.vcf.vcf", comment.char = "", skip = 30, header=T)
+snps1_range <- read.table("Genotyping_data_minmax_200k.vcf.vcf", comment.char = "", skip = 30, header=T)
 snps1_range[,c(10:ncol(snps1_range))] <- as.data.frame(sapply(snps1_range[,c(10:ncol(snps1_range))], function(x) gsub("0/0", 0, x)))
 snps1_range[,c(10:ncol(snps1_range))] <- as.data.frame(sapply(snps1_range[,c(10:ncol(snps1_range))], function(x) gsub("0/1", 1, x)))
 snps1_range[,c(10:ncol(snps1_range))] <- as.data.frame(sapply(snps1_range[,c(10:ncol(snps1_range))], function(x) gsub("1/0", 1, x)))
@@ -725,4 +725,3 @@ print(plot3, vp=viewport(layout.pos.row=1,layout.pos.col=1))
 dev.off()
 
 
-# anyway, generally shows systemic genes involved across many tissues... but not as many immune/kidney as hoped.
